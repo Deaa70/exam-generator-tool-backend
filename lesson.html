@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lesson</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- KaTeX: stylesheet, core, auto-render. No `defer` — these must
+     finish executing before our inline init script at the bottom. -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+
+<style>
+  /* ================================================================
+     1. PAGE SETUP
+     ================================================================ */
+  @page {
+    background-color: #05001b;
+    margin: 20mm 5mm 24mm 5mm;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; padding: 0; }
+
+  /* ================================================================
+     2. CRITICAL — dark canvas
+     ================================================================ */
+  html {
+    background-color: #05001b;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    background-color: #05001b;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color: white;
+    font-family: "Cairo", 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 5.4px;
+    line-height: 1.6;
+    direction: rtl;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ================================================================
+     3. THEME VARIABLES
+     ================================================================ */
+  :root {
+    --bg:           #05001b;
+    --container:    #0a0428;
+    --container-2:  #0d0530;
+    --border:       #1a1040;
+    --border-2:     #2a1a55;
+
+    --text:         #e2e8f0;
+    --text-body:    #cbd5e1;
+    --text-muted:   #94a3b8;
+    --text-faint:   #8591a3;
+
+    --accent:        #00ffbf;
+    --accent-soft:   rgba(0,255,191,0.07);
+    --accent-soft-2: rgba(0,255,191,0.13);
+    --accent-border: rgba(0,255,191,0.35);
+
+    --purple:        #c084fc;
+    --purple-soft:   rgba(168,85,247,0.10);
+    --purple-border: rgba(168,85,247,0.35);
+
+    --amber:        #f59e0b;
+    --yellow:       #fbbf24;
+    --amber-soft:   rgba(245,158,11,0.07);
+    --amber-border: rgba(245,158,11,0.30);
+    --amber-text:   #fde68a;
+
+    --green:        #22c55e;
+    --green-text:   #4ade80;
+    --green-soft:   rgba(34,197,94,0.08);
+    --green-border: rgba(34,197,94,0.35);
+    --green-body:   #86efac;
+
+    --red:        #ef4444;
+    --red-text:   #f87171;
+    --red-soft:   rgba(239,68,68,0.10);
+    --red-border: rgba(239,68,68,0.35);
+
+    --blue:        #3b82f6;
+    --blue-text:   #60a5fa;
+    --blue-soft:   rgba(59,130,246,0.10);
+    --blue-border: rgba(59,130,246,0.35);
+
+    --cyan:        #22d3ee;
+    --cyan-border: rgba(34,211,238,0.35);
+  }
+
+  /* ================================================================
+     4. KATEX — sizing, alignment, colours
+     ================================================================ */
+  .katex {
+    font-size: 1.15em !important;
+    color: inherit;
+    direction: ltr !important;
+    unicode-bidi: isolate !important;
+  }
+  .katex-display {
+    display: block !important;
+    text-align: center !important;
+    margin: 4px 0 !important;
+  }
+  .katex-display > .katex {
+    display: block !important;
+    text-align: center !important;
+  }
+  .katex .katex-html { color: inherit; }
+  .katex-error {
+    color: #f87171 !important;
+    font-family: ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+  
+  
+
+  /* ================================================================
+     5. WATERMARK
+     ================================================================ */
+  #watermark { display: none; }
+
+  @media print {
+    #watermark {
+      display: block !important;
+      position: fixed;
+      top: 50%;
+      left: 70%;
+      transform: translate(-70%, -50%) rotate(-35deg);
+      font-family: "Cairo", sans-serif;
+      font-size: 3.3rem;
+      font-weight: 900;
+      color: #00ffbf;
+      opacity: 0.18;
+      z-index: 50;
+      pointer-events: none;
+      white-space: nowrap;
+      text-align: center;
+      width: 90%;
+    }
+    html, body {
+      background-color: #05001b !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+
+  /* ================================================================
+     6. MAIN CONTENT WRAPPER
+     ================================================================ */
+  .main-content {
+    font-family: "Cairo", sans-serif;
+    font-size: 3pt;
+    line-height: 1.6;
+    color: white;
+    background: #05001b;
+  }
+
+  /* ================================================================
+     7. SINGLE-COLUMN PAGE LAYOUT
+     ================================================================ */
+  .page {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 20px 18px 43px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ================================================================
+     8. BLOCKS
+     ================================================================ */
+  .block {
+    margin-block-end: 4px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .card, .q-card, .iq-card, .mcq-card, .match-card, .sort-card, .cmp-card,
+  .review-card, .summary-card, .theorem-card, .proof-card, .timeline-card,
+  .cmap-card, .image-card, .formula-card, .callout, .media-card, .table-wrap {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .card {
+    background: var(--container);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 5px;
+  }
+
+  /* ── markdown ── */
+  .md { color: inherit; }
+  .md > *:first-child { margin-block-start: 0; }
+  .md > *:last-child  { margin-block-end: 0; }
+  .md p { margin: 0 0 2px; }
+  .md ul, .md ol { margin: 1px 0; padding-inline-start: 10px; }
+  .md li { margin-block-end: 1px; }
+  .md strong { color: #f1f5f9; font-weight: 700; }
+  .md em { color: #e2e8f0; }
+  .md code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: var(--container-2);
+    border: 1px solid var(--border-2);
+    border-radius: 2px;
+    padding: 0 2px;
+    font-size: 0.92em;
+    color: var(--accent);
+  }
+  .md pre {
+    background: var(--container-2);
+    border: 1px solid var(--border-2);
+    border-radius: 4px;
+    padding: 4px;
+    overflow: auto;
+    direction: ltr;
+    text-align: left;
+  }
+  .md blockquote {
+    margin: 2px 0;
+    padding-inline-start: 4px;
+    border-inline-start: 2px solid var(--accent-border);
+    color: var(--text-muted);
+  }
+  .md a { color: var(--accent); text-decoration: underline; }
+  .md table { border-collapse: collapse; width: 100%; margin: 2px 0; }
+  .md th, .md td { border: 1px solid var(--border-2); padding: 2px 3px; }
+  .md h1, .md h2, .md h3, .md h4 { color: var(--text); margin: 3px 0 1px; line-height: 1.4; }
+  .md hr { border: 0; border-top: 1px solid var(--border-2); }
+
+  /* ── title / heading ── */
+  .block-title {
+    font-size: 7.8px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.35;
+    margin: 0;
+    padding-block: 2px;
+  }
+  .block-title .md { color: #ffffff; }
+
+  .block-heading { margin: 0; padding-block: 1px; }
+  .block-heading.lvl-1 { font-size: 6.3px; color: var(--text); font-weight: 700; }
+  .block-heading.lvl-2 { font-size: 5.4px; color: var(--accent); font-weight: 700; }
+  .block-heading.lvl-3,
+  .block-heading.lvl-4,
+  .block-heading.lvl-5,
+  .block-heading.lvl-6 { font-size: 4.8px; color: var(--text); font-weight: 600; }
+
+  .block-text { padding-block: 1px; color: var(--text-body); }
+
+  .block-link { padding-block: 1px; }
+  .block-link a {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 4.8px;
+    text-decoration: underline;
+    word-break: break-all;
+  }
+
+  /* ── image ── */
+  .image-card {
+    background: var(--container);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .image-frame { position: relative; width: 100%; background: var(--container); }
+  .image-frame img {
+    display: block;
+    width: 100%;
+    max-height: 90px;
+    object-fit: contain;
+    background: var(--container);
+  }
+  .image-fallback {
+    display: none;
+    min-height: 27px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2px;
+    color: var(--text-faint);
+    font-size: 4.5px;
+    text-align: center;
+    padding: 8px 6px;
+    background: var(--container-2);
+    border: 1px dashed var(--border-2);
+    border-radius: 4px;
+    margin: 4px;
+  }
+  .image-frame.img-failed .image-fallback { display: flex; }
+  .image-fallback-icon { font-size: 8.4px; color: var(--border-2); }
+  .image-caption {
+    padding: 2px 5px;
+    background: var(--container-2);
+    color: var(--text-body);
+    font-size: 4.5px;
+    text-align: center;
+    border-block-start: 1px solid var(--border);
+  }
+
+  /* ── divider ── */
+  .block-divider { padding-block: 4px; }
+  .block-divider hr {
+    border: 0;
+    height: 0;
+    border-block-start: 1px solid var(--border-2);
+    opacity: .65;
+    margin: 0;
+  }
+  .block-divider hr.style-dashed { border-block-start-style: dashed; }
+  .block-divider hr.style-dotted { border-block-start-style: dotted; }
+
+  /* ── definition ── */
+  .def-term {
+    color: var(--yellow);
+    font-weight: 700;
+    font-size: 5.4px;
+    margin-block-end: 2px;
+    padding-inline-start: 3px;
+  }
+  .def-body { color: var(--text-body); font-size: 4.8px; }
+
+  /* ── quote ── */
+  .block-quote .card {
+    background: var(--container);
+    border: 0;
+    border-radius: 6px;
+    border-inline-start: 2px solid var(--accent);
+    padding: 5px 7px;
+  }
+  .quote-text { color: var(--text); font-size: 5.4px; }
+  .quote-author {
+    color: var(--text-muted);
+    font-size: 4.5px;
+    margin-block-start: 3px;
+    text-align: left;
+    direction: ltr;
+  }
+
+  /* ── formula ── */
+  .formula-card {
+    background: var(--container);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 4px 4px;
+    margin-block: 4px;
+    text-align: center;
+    direction: ltr;
+  }
+  .formula-card .md {
+    color: var(--accent);
+    font-size: 5.5px;
+    line-height: 1.3;
+    overflow-x: hidden;
+  }
+  .formula-caption {
+    margin-block-start: 3px;
+    color: var(--text-muted);
+    font-size: 3.5px;
+    direction: rtl;
+  }
+
+  /* ── lists ── */
+  .list-title {
+    color: var(--text);
+    font-weight: 600;
+    font-size: 5.1px;
+    margin-block-end: 3px;
+  }
+  .list-item {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+    margin-block-end: 2px;
+    color: var(--text-body);
+  }
+  .list-marker { color: var(--accent); flex: 0 0 auto; font-size: 4.8px; }
+  .list-body { flex: 1 1 auto; min-width: 0; }
+
+  /* ── generic question / theorem / proof ── */
+  .q-card {
+    background: var(--container);
+    border: 1px solid var(--amber-border);
+    border-radius: 6px;
+    padding: 5px 5px;
+  }
+  .q-title {
+    color: var(--yellow);
+    font-weight: 700;
+    font-size: 5.4px;
+    margin-block-end: 3px;
+  }
+  .q-body { color: var(--text); }
+
+  .body-label {
+    display: block;
+    font-weight: 700;
+    font-size: 4.6px;
+    letter-spacing: 0.3px;
+    margin-block-end: 1px;
+    opacity: 0.85;
+    text-transform: uppercase;
+  }
+
+  .hint-body {
+    background: var(--amber-soft);
+    border: 1px solid rgba(245,158,11,0.18);
+    border-radius: 4px;
+    padding: 4px 5px;
+    color: var(--amber-text);
+    font-size: 4.8px;
+    margin-block-start: 3px;
+  }
+  .hint-body .body-label { color: var(--yellow); }
+  .hint-body .list-item { color: var(--amber-text); margin-block-end: 2px; }
+  .hint-body .list-marker { color: var(--yellow); }
+
+  .solution-body {
+    background: var(--green-soft);
+    border: 1px solid var(--green-border);
+    border-radius: 4px;
+    padding: 4px 5px;
+    margin-block-start: 3px;
+    color: var(--green-body);
+    font-size: 4.8px;
+  }
+  .solution-body .body-label { color: var(--green-text); }
+  .solution-body .md { color: var(--green-body); }
+
+  .steps-label {
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 4.8px;
+    margin-block: 2px 1px;
+  }
+  .step-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 2px;
+    margin-block-end: 2px;
+    color: var(--text-body);
+  }
+  .step-num {
+    color: var(--accent);
+    font-weight: 700;
+    flex: 0 0 auto;
+    font-size: 4.8px;
+    min-width: 7px;
+  }
+
+  .req-row {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+    margin-block-end: 2px;
+    color: #93c5fd;
+  }
+  .req-num {
+    color: #60a5fa;
+    font-weight: 700;
+    flex: 0 0 auto;
+    font-size: 4.8px;
+    min-width: 7px;
+  }
+  .req-body { flex: 1 1 auto; min-width: 0; }
+
+  .theorem-card {
+    background: var(--container);
+    border: 1px solid var(--purple-border);
+    border-radius: 6px;
+    padding: 5px 5px;
+  }
+  .theorem-title { color: var(--purple); font-weight: 700; font-size: 5.4px; margin-block-end: 3px; }
+  .theorem-body { color: var(--text); }
+
+  .proof-card {
+    background: var(--container);
+    border: 1px solid var(--cyan-border);
+    border-radius: 6px;
+    padding: 5px 5px;
+  }
+  .proof-title { color: var(--cyan); font-weight: 700; font-size: 5.4px; margin-block-end: 3px; }
+  .proof-desc { color: var(--text-body); font-size: 4.8px; margin-block-end: 2px; }
+
+  .mcq-card {
+    background: var(--container);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 5px;
+  }
+  .mcq-question { color: var(--text); margin-block-end: 2px; }
+  .mcq-choice {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 3px 4px;
+    border-radius: 4px;
+    border: 1px solid var(--border-2);
+    background: var(--container-2);
+    margin-block: 2px;
+    color: var(--text-body);
+  }
+  .mcq-choice.is-correct {
+    background: rgba(34,197,94,0.13);
+    border-color: var(--green);
+    color: var(--green-text);
+  }
+  .mcq-choice.is-wrong {
+    background: rgba(239,68,68,0.13);
+    border-color: var(--red);
+    color: var(--red-text);
+  }
+  .mcq-choice.is-dim { color: #64748b; opacity: .85; }
+  .mcq-radio {
+    flex: 0 0 auto;
+    width: 6.6px;
+    height: 6.6px;
+    border-radius: 50%;
+    border: 1.5px solid currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-block-start: 1px;
+  }
+  .mcq-radio .dot {
+    width: 3px; height: 3px; border-radius: 50%; background: currentColor; display: block;
+  }
+  .mcq-choice-body { flex: 1 1 auto; min-width: 0; }
+
+  .explanation-box {
+    background: var(--container-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 5px;
+    margin-block-start: 3px;
+    color: var(--text-muted);
+    font-size: 4.8px;
+  }
+  .explanation-box .body-label { color: var(--text-muted); }
+  .explanation-box .md { color: var(--text-muted); }
+
+  .iq-card {
+    background: var(--container);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 5px;
+  }
+  .iq-question { color: var(--text); }
+  .iq-answer {
+    background: var(--green-soft);
+    border: 1px solid var(--green-border);
+    border-radius: 4px;
+    padding: 4px 5px;
+    margin-block-start: 3px;
+    color: var(--green-text);
+    font-size: 4.8px;
+  }
+  .iq-answer .body-label { color: var(--green-text); }
+  .iq-answer .md { color: var(--green-text); }
+
+  .review-card {
+    background: var(--container);
+    border: 1px solid var(--amber-border);
+    border-radius: 6px;
+    padding: 5px 5px;
+  }
+  .review-title { color: var(--yellow); font-weight: 700; font-size: 5.4px; margin-block-end: 4px; }
+
+  .summary-card {
+    background: var(--container);
+    border: 1px solid var(--accent-border);
+    border-radius: 6px;
+    padding: 5px 5px;
+  }
+  .summary-title { color: var(--accent); font-weight: 700; font-size: 5.4px; margin-block-end: 4px; }
+
+  .callout {
+    border-radius: 4px;
+    padding: 4px 5px;
+    border-inline-start: 2px solid var(--blue);
+    background: var(--blue-soft);
+  }
+  .callout-title {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-weight: 700;
+    font-size: 5.1px;
+    margin-block-end: 2px;
+  }
+  .callout-body { color: var(--text-body); font-size: 4.8px; }
+
+  .callout.note      { background: rgba(30,58,95,0.14);  border-inline-start-color: var(--blue); }
+  .callout.note      .callout-title { color: var(--blue-text); }
+  .callout.warning   { background: rgba(92,61,46,0.14);  border-inline-start-color: var(--amber); }
+  .callout.warning   .callout-title { color: var(--yellow); }
+  .callout.danger    { background: rgba(92,46,46,0.14);  border-inline-start-color: var(--red); }
+  .callout.danger    .callout-title { color: var(--red-text); }
+  .callout.info      { background: rgba(30,58,95,0.14);  border-inline-start-color: #06b6d4; }
+  .callout.info      .callout-title { color: var(--cyan); }
+  .callout.success   { background: rgba(30,74,46,0.20);  border-inline-start-color: var(--green); }
+  .callout.success   .callout-title { color: var(--green-text); }
+  .callout.important { background: rgba(74,30,95,0.14);  border-inline-start-color: #a855f7; }
+  .callout.important .callout-title { color: var(--purple); }
+
+  .table-title { color: var(--accent); font-weight: 600; font-size: 5.7px; margin-block-end: 3px; }
+  .table-wrap {
+    background: var(--container);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    width: 100%;
+  }
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    direction: rtl;
+    table-layout: auto;
+  }
+  table.data-table thead th {
+    background: var(--container-2);
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 4.8px;
+    text-align: start;
+    padding: 3px 4px;
+    border-inline-start: 1px solid var(--border-2);
+    border-block-end: 1px solid var(--border-2);
+    vertical-align: top;
+  }
+  table.data-table thead th:first-child { border-inline-start: 0; }
+  table.data-table tbody td {
+    color: var(--text-body);
+    font-size: 4.5px;
+    padding: 2px 4px;
+    border-inline-start: 1px solid var(--border);
+    border-block-start: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table.data-table tbody td:first-child { border-inline-start: 0; }
+  table.data-table tbody tr:nth-child(even) { background: rgba(30,41,59,0.35); }
+  .table-caption {
+    color: #64748b;
+    font-size: 4.5px;
+    text-align: center;
+    margin-block-start: 2px;
+  }
+
+  .timeline-card {
+    background: var(--container);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 4px;
+  }
+  .timeline-title {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 5.1px;
+    text-align: center;
+    margin-block-end: 3px;
+  }
+  .timeline-track {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .timeline-item {
+    width: 58px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  .timeline-date {
+    background: var(--accent-soft-2);
+    border: 1px solid var(--accent-border);
+    border-radius: 999px;
+    padding: 1px 4px;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 4.2px;
+    white-space: nowrap;
+    z-index: 2;
+  }
+  .timeline-node { display: flex; flex-direction: column; align-items: center; z-index: 1; }
+  .timeline-dot { width: 2.4px; height: 2.4px; border-radius: 50%; background: var(--accent); margin-block: 1px; }
+  .timeline-line { width: 1px; height: 6px; background: rgba(0,255,191,0.35); }
+  .timeline-event {
+    background: var(--container-2);
+    border: 1px solid var(--border-2);
+    border-radius: 3px;
+    padding: 2px 3px;
+    width: 96%;
+    min-height: 22px;
+    color: var(--text-body);
+    font-size: 4.2px;
+  }
+
+  .cmap-card {
+    background: var(--container);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 4px;
+  }
+  .cmap-title {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 5.1px;
+    text-align: center;
+    margin-block-end: 3px;
+  }
+  .cmap-root-wrap { display: flex; flex-direction: column; align-items: center; margin-block-end: 4px; }
+  .cmap-root {
+    background: var(--accent-soft-2);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 4.8px;
+    text-align: center;
+  }
+  .cmap-root-line { width: 1px; height: 4px; background: rgba(0,255,191,0.35); margin-block-start: 1px; }
+  .cmap-branches { display: flex; flex-wrap: wrap; gap: 2px; }
+  .cmap-branch {
+    flex: 1 1 58px;
+    min-width: 58px;
+    background: var(--container-2);
+    border: 1px solid var(--border-2);
+    border-radius: 4px;
+    padding: 3px;
+    margin-block-end: 1px;
+  }
+  .cmap-branch-label {
+    background: var(--purple-soft);
+    border: 1px solid var(--purple-border);
+    border-radius: 3px;
+    padding: 1px 3px;
+    margin-block-end: 2px;
+    color: var(--purple);
+    font-weight: 600;
+    font-size: 4.5px;
+    text-align: center;
+  }
+  .cmap-child {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-block-end: 1px;
+    color: var(--text-body);
+    font-size: 4.2px;
+  }
+  .cmap-child-dot {
+    width: 2px; height: 2px; border-radius: 50%; background: var(--cyan); flex: 0 0 auto;
+  }
+
+  .media-card {
+    background: var(--container);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .media-frame {
+    min-height: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    color: var(--text-faint);
+    font-size: 4.8px;
+    background: var(--container-2);
+    border-block-end: 1px solid var(--border);
+    padding: 8px 6px;
+    text-align: center;
+  }
+  .media-icon { font-size: 9.6px; color: var(--border-2); }
+  .media-url { color: var(--text-muted); font-size: 4.2px; direction: ltr; word-break: break-all; }
+  .media-caption {
+    padding: 2px 5px;
+    background: var(--container-2);
+    color: var(--text-muted);
+    font-size: 4.5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+  }
+  .audio-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    background: var(--accent-soft-2);
+    border: 1px solid var(--accent-border);
+    border-radius: 999px;
+    padding: 2px 5px;
+    color: var(--accent);
+    font-size: 4.8px;
+    font-weight: 600;
+  }
+
+  .match-card {
+    background: var(--container);
+    border: 1px solid var(--purple-border);
+    border-radius: 6px;
+    padding: 5px 5px;
+  }
+  .match-title { color: var(--purple); font-weight: 700; font-size: 5.4px; margin-block-end: 3px; }
+  .match-question { color: var(--text); margin-block-end: 4px; }
+  .match-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--container-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 4px;
+    margin-block-end: 4px;
+    color: var(--text-muted);
+    font-size: 4.5px;
+  }
+  .match-cols { display: flex; gap: 3px; }
+  .match-col { flex: 1 1 0; min-width: 0; }
+  .match-col-title {
+    color: var(--purple);
+    font-weight: 600;
+    font-size: 4.5px;
+    text-align: center;
+    margin-block-end: 2px;
+  }
+  .match-item {
+    background: var(--container-2);
+    border: 1px solid var(--green-border);
+    border-radius: 4px;
+    padding: 3px 4px;
+    margin-block-end: 2px;
+    color: var(--text-body);
+    position: relative;
+    font-size: 4.8px;
+  }
+  .match-item.right { border-color: var(--green-border); }
+  .match-badge {
+    position: absolute;
+    top: -3px;
+    inset-inline-end: -3px;
+    background: var(--green);
+    color: #ffffff;
+    border-radius: 50%;
+    min-width: 8.4px;
+    height: 8.4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4.2px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .sort-card {
+    background: var(--container);
+    border: 1px solid var(--purple-border);
+    border-radius: 6px;
+    padding: 5px 5px;
+  }
+  .sort-title { color: var(--purple); font-weight: 700; font-size: 5.4px; margin-block-end: 3px; }
+  .sort-question { color: var(--text); margin-block-end: 4px; }
+  .sort-label { color: var(--text-muted); font-weight: 600; font-size: 4.5px; margin-block-end: 2px; }
+  .sort-seq {
+    background: var(--container-2);
+    border: 1px solid var(--green-border);
+    border-radius: 4px;
+    padding: 4px;
+    margin-block-end: 4px;
+  }
+  .sort-seq-title { color: var(--green-text); font-weight: 600; font-size: 5.1px; margin-block-end: 2px; }
+  .sort-row {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    background: rgba(34,197,94,0.08);
+    border-radius: 3px;
+    padding: 2px 4px;
+    margin-block-end: 1px;
+    color: var(--text);
+    font-size: 4.8px;
+  }
+  .sort-num { color: var(--green); font-weight: 700; min-width: 8px; font-size: 5.1px; }
+
+  .cmp-card {
+    background: var(--container);
+    border: 1px solid var(--amber-border);
+    border-radius: 6px;
+    padding: 5px 5px;
+  }
+  .cmp-title { color: var(--yellow); font-weight: 700; font-size: 5.4px; margin-block-end: 3px; }
+  .cmp-question { color: var(--text); margin-block-end: 3px; }
+
+  .unknown-block {
+    background: var(--container);
+    border: 1px dashed var(--border-2);
+    border-radius: 6px;
+    padding: 4px 5px;
+    color: var(--text-muted);
+    font-size: 4.8px;
+  }
+  .unknown-block code { color: var(--amber-text); }
+
+  @media print {
+    .page {
+      max-width: none;
+      padding: 10px 11px 22px;
+    }
+    .block {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .card, .q-card, .iq-card, .mcq-card, .match-card, .sort-card, .cmp-card,
+    .review-card, .summary-card, .theorem-card, .proof-card, .timeline-card,
+    .cmap-card, .image-card, .formula-card, .callout, .media-card, .table-wrap {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .table-wrap { break-inside: auto; page-break-inside: auto; }
+    .data-table tr { break-inside: avoid; page-break-inside: avoid; }
+    .md p, .md li, .list-item, .step-row, .req-row {
+      orphans: 2;
+      widows: 2;
+    }
+  }
+</style>
+</head>
+<body>
+<div id="watermark">منصة سراج التعليمية</div>
+
+<main class="page main-content"><div class="block">
+      <h1 class="block-title"><span class="md"> نهايات و الاستمرار , قسم 2 </span></h1>
+    </div><div class="block">
+      <h2 class="block-heading lvl-2"><span class="md">نهاية تابع مركّب</span></h2>
+    </div><div class="block block-text"><span class="md">**معنى نهاية التابع المركّب:**
+التابع المركّب $g(h(x))$ يعني تطبيق تابعين بالتعاقب: نطبّق التابع الداخلي $h$ أولاً، ثم نطبّق التابع الخارجي $g$ على نتيجته. حساب نهايته يعني إيجاد القيمة التي يستقر عليها التابع الخارجي $g$ عندما تقترب قيم التابع الداخلي $h$ من نهايتها. هي باختصار عملية حساب نهاية بشكل متسلسل &#34;من الداخل إلى الخارج&#34;.
+
+**أين نستخدمها؟**
+نستخدمها عند حساب نهايات التوابع المتداخلة التي تعجز قواعد العمليات المباشرة عن حلها (مثل $\sqrt{x^2-1}$ أو $\cos(\frac{1}{x})$). كما تُعدّ هذه المبرهنة الأساس الرياضي لتقنية &#34;تغيير المتحول&#34;، حيث نستبدل التعبير الداخلي المعقد بمتحول جديد (مثل وضع $X = \frac{1}{x}$) لتحويل حساب نهاية معقدة عند اللانهاية إلى نهاية أبسط وأكثر ألفة عند الصفر.</span></div><div class="block">
+      <div class="theorem-card"><div class="theorem-title"><span class="md">مبرهنة 4: نهاية تابع مركّب</span></div><div class="theorem-body"><span class="md">نتأمل ثلاثة توابع $f$ و $g$ و $h$ ونفترض أنّ $f(x) = g \circ h(x) = g(h(x))$. إذا كان $\lim_{x \to a} h(x) = b$ و $\lim_{t \to b} g(t) = c$، فعندئذ $\lim_{x \to a} f(x) = c$، وذلك سواءً كانت المقادير $a$ و $b$ و $c$ أعداداً حقيقية منتهية أو مقادير لانهاية.</span></div>
+      </div>
+    </div><div class="block block-text"><span class="md">عند استعمال هذه المبرهنة في إيجاد نهاية تابع مركّب $f : x \mapsto g(h(x))$ عند $a$، نبحث أولاً عن نهاية $b = \lim_{x \to a} h(x)$، ثمّ نبحث عن نهاية $g$ عند $b$ عندما نكتب $X = h(x)$ و $f(x) = g(X) = (g \circ h)(x)$، نقول إننا غيّرنا المتحول</span></div><div class="block">
+      <div class="q-card"><div class="q-title"><span class="md">مثال محلول: حساب نهاية تابع مركب</span></div><div class="q-body"><span class="md">أجب عن الاسئلة التالية :</span></div><div class="hint-body" style="background:rgba(59,130,246,0.07);border-color:rgba(59,130,246,0.25);color:#93c5fd;">
+            <span class="body-label" style="color:#60a5fa;">المطلوب</span><div class="req-row">
+                <span class="req-num">1.</span>
+                <span class="req-body"><span class="md">حساب نهاية $f(x) = \sqrt{x^2 - x + 1}$ عند $+\infty$</span></span>
+              </div><div class="req-row">
+                <span class="req-num">2.</span>
+                <span class="req-body"><span class="md">حساب نهاية $f(x) = \frac{1}{\sqrt{3x-1}}$ عندما تسعى $x$ إلى $\frac{1}{3}$</span></span>
+              </div></div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 1:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">ضع $X = h(x) = x^2 - x + 1$</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">ابحث عن نهاية $h(x)$ عند $+\infty$</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">استخدم مبرهنة التابع المركب</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">نضع $X = h(x) = x^2 - x + 1$، عندئذ $f(x) = \sqrt{X}$</span></div><div class="step-row"><span class="md">ومعلومٌ لدينا أنّ $\lim_{x \to +\infty} h(x) = +\infty$</span></div><div class="step-row"><span class="md">وأنّ $\lim_{X \to +\infty} \sqrt{X} = +\infty$</span></div><div class="step-row"><span class="md">إذن حسب مبرهنة التابع المركب: $\lim_{x \to +\infty} f(x) = +\infty$</span></div><div style="margin-block-start:3px;"><span class="md">$\lim_{x \to +\infty} \sqrt{x^2 - x + 1} = +\infty$</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 2:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">ضع $X = h(x) = 3x - 1$</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">لاحظ أن $X &gt; 0$ على المجال المعطى</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">ابحث عن نهاية $h(x)$ عند $\frac{1}{3}$ ثم نهاية $\frac{1}{\sqrt{X}}$ عند $0$</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">نضع $X = h(x) = 3x - 1$ على $]\frac{1}{3}, +\infty[$، عندئذ $X &gt; 0$ و $f(x) = \frac{1}{\sqrt{X}}$</span></div><div class="step-row"><span class="md">ومعلوم لدينا أنّ $\lim_{x \to \frac{1}{3}} h(x) = 0$</span></div><div class="step-row"><span class="md">و $\lim_{X \to 0} \left(\frac{1}{\sqrt{X}}\right) = +\infty$</span></div><div class="step-row"><span class="md">إذن $\lim_{x \to \frac{1}{3}} f(x) = +\infty$</span></div><div style="margin-block-start:3px;"><span class="md">$\lim_{x \to \frac{1}{3}} \frac{1}{\sqrt{3x-1}} = +\infty$</span></div>
+            </div>
+          </div></div>
+    </div><div class="block block-text"><span class="md">**تبسيط النهايات المعقدة باستخدام تغيير المتحول**
+
+لحساب النهايات الصعبة، نستبدل الجزء المعقد بمتحول جديد $X$ لتحويلها لنهاية نعرفها:
+
+**1. نهاية $x \sin(\frac{1}{x})$:**
+• **عند $+\infty$:** نضع $X = \frac{1}{x}$. وبما أن $x$ تذهب لـ $+\infty$ فإن $X$ تذهب لـ $0$. يتحول التابع إلى $\frac{\sin X}{X}$. وبما أن نهايتها المعروفة عند $0$ هي $1$، فإن النتيجة هي $1$.
+• **عند $0$:** نحصر التابع $|x \sin(\frac{1}{x})| \le |x|$. ولأن نهاية $|x|$ عند $0$ هي $0$، فإن النهاية تساوي $0$.
+
+**2. المشتقة كنهاية:**
+تعريف المشتقة $f&#39;(a)$ يعتمد على نفس الفكرة. بوضع $X = x - a$ (حيث $X \to 0$)، تتحول صيغة المشتقة المعقدة $\lim_{x \to a} \frac{f(x) - f(a)}{x - a}$ إلى الصيغة المكافئة والأبسط: $\lim_{X \to 0} \frac{f(a+X) - f(a)}{X} = f&#39;(a)$.</span></div><div class="block">
+      <div class="q-card"><div class="q-title"><span class="md">تدرب صفحة 49: حساب نهايات توابع مركبة</span></div><div class="q-body"><span class="md">احسب نهايات التوابع الآتية عند $a$:</span></div><div class="hint-body" style="background:rgba(59,130,246,0.07);border-color:rgba(59,130,246,0.25);color:#93c5fd;">
+            <span class="body-label" style="color:#60a5fa;">المطلوب</span><div class="req-row">
+                <span class="req-num">1.</span>
+                <span class="req-body"><span class="md">$f(x) = \sqrt{\frac{x+3}{x-5}}$، $a = 5$، $D = ]5, +\infty[$</span></span>
+              </div><div class="req-row">
+                <span class="req-num">2.</span>
+                <span class="req-body"><span class="md">$f(x) = \sqrt{-x^3 + x^2 + x}$، $a = -\infty$، $D = \left]-\infty, \frac{1-\sqrt{5}}{2}\right]$</span></span>
+              </div><div class="req-row">
+                <span class="req-num">3.</span>
+                <span class="req-body"><span class="md">$f(x) = \frac{1}{\sqrt{1-x^2}}$، $a = 1$، $D = ]-1, 1[$</span></span>
+              </div><div class="req-row">
+                <span class="req-num">4.</span>
+                <span class="req-body"><span class="md">$f(x) = \cos\left(\frac{\pi x + 1}{x+2}\right)$، $a = +\infty$، $D = \mathbb{R} \setminus \{-2\}$</span></span>
+              </div><div class="req-row">
+                <span class="req-num">5.</span>
+                <span class="req-body"><span class="md">$f(x) = \cos^2\left(\pi \times \sqrt{\frac{x-1}{x+1}}\right)$، $a = +\infty$، $D = ]-\infty, -1[ \cup ]1, +\infty[$</span></span>
+              </div><div class="req-row">
+                <span class="req-num">6.</span>
+                <span class="req-body"><span class="md">ليكن $f(x) = \frac{x-3}{x+5}$ على $]-5, +\infty[$. احسب $\lim_{x \to +\infty} f(x)$، واستنتج $\lim_{x \to +\infty} f(f(x))$.</span></span>
+              </div></div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 1:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">احسب نهاية ما داخل الجذر أولاً</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">طبق الجذر على النهاية</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">هنا $\lim_{x \to 5^+} \frac{x+3}{x-5} = +\infty$</span></div><div class="step-row"><span class="md">إذن $\lim_{x \to 5} \sqrt{\frac{x+3}{x-5}} = +\infty$</span></div><div style="margin-block-start:3px;"><span class="md">$\lim_{x \to 5} \sqrt{\frac{x+3}{x-5}} = +\infty$</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 2:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">احسب نهاية كثير الحدود الداخلي عند $-\infty$</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">لاحظ أن الحد المسيطر هو $-x^3$</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">هنا $\lim_{x \to -\infty} (-x^3 + x^2 + x) = +\infty$</span></div><div class="step-row"><span class="md">إذن $\lim_{x \to -\infty} \sqrt{-x^3 + x^2 + x} = +\infty$</span></div><div style="margin-block-start:3px;"><span class="md">$\lim_{x \to -\infty} \sqrt{-x^3 + x^2 + x} = +\infty$</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 3:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">لاحظ أن المقام يؤول إلى الصفر بقيم موجبة</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">مقلوب عدد موجب يقترب من الصفر يؤول إلى الموجب اللانهاية</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">هنا $\lim_{x \to 1^-} \frac{1}{1-x^2} = +\infty$</span></div><div class="step-row"><span class="md">إذن $\lim_{x \to 1^-} \frac{1}{\sqrt{1-x^2}} = +\infty$</span></div><div style="margin-block-start:3px;"><span class="md">$\lim_{x \to 1} \frac{1}{\sqrt{1-x^2}} = +\infty$</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 4:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">احسب نهاية الكسر الداخلي</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">طبق دالة الجيب التمام على النهاية</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">هنا $\lim_{x \to +\infty} \frac{\pi x + 1}{x+2} = \pi$</span></div><div class="step-row"><span class="md">إذن $\lim_{x \to +\infty} \cos\left(\frac{\pi x + 1}{x+2}\right)$
+$ = \cos \pi = -1$</span></div><div style="margin-block-start:3px;"><span class="md">$\lim_{x \to +\infty} \cos\left(\frac{\pi x + 1}{x+2}\right) = -1$</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 5:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">احسب نهاية الجذر الداخلي أولاً</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">طبق جيب التمام ثم التربيع</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">هنا $\lim_{x \to +\infty} \sqrt{\frac{x-1}{x+1}} = 1$</span></div><div class="step-row"><span class="md">إذن 
+ $\lim_{x \to +\infty} \cos^2\left(\pi \times \sqrt{\frac{x-1}{x+1}}\right) $
+ $= \cos^2 \pi = 1$</span></div><div style="margin-block-start:3px;"><span class="md">$\lim_{x \to +\infty} \cos^2\left(\pi \times \sqrt{\frac{x-1}{x+1}}\right) = 1$</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 6:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">احسب نهاية $f(x)$ أولاً</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">استخدم النهاية المحسوبة كمدخل للتابع $f$ مرة أخرى</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">$\lim_{x \to +\infty} f(x) = 1$</span></div><div class="step-row"><span class="md">إذن $\lim_{x \to +\infty} f(f(x)) = f(1) = -\frac{1}{3}$</span></div><div style="margin-block-start:3px;"><span class="md">$\lim_{x \to +\infty} f(f(x)) = -\frac{1}{3}$</span></div>
+            </div>
+          </div></div>
+    </div><div class="block">
+      <h2 class="block-heading lvl-2"><span class="md">المقارب المائل</span></h2>
+    </div><div class="block block-text"><span class="md">**ما هو المقارب المائل وماذا يعني؟**
+المقارب المائل هو مستقيم معادلته $y = ax + b$، يمثل المسار الذي يقترب منه منحنى التابع تقارباً شديداً عندما تتجه $x$ نحو اللانهاية ($+\infty$ أو $-\infty$)، حتى تكاد المسافة العمودية بين المنحنى وهذا المستقيم تتلاشى وتصبح صفراً.
+
+**أين نستخدمه؟**
+نستخدمه لفهم وتوقع سلوك منحنى التابع عند الأطراف. يظهر المقارب المائل بشكل أساسي عند دراسة التوابع الكسرية التي تكون درجة بسطها أكبر بدرجة واحدة من درجة مقامها (مثل $\frac{x^2+3x+1}{x+2}$).
+
+**دراسة الوضع النسبي:**
+بعد إثبات أن المستقيم مقارب، يُطلب منك غالباً معرفة هل يقترب المنحنى $C_f$ من المقارب من الأعلى أم من الأسفل.
+**الطريقة:** ندرس إشارة الفرق $g(x) = f(x) - (ax + b)$:
+• إذا كانت $g(x) &gt; 0$ على مجال ما، فالمنحنى يقع **فوق** المقارب في ذلك المجال.
+• إذا كانت $g(x) &lt; 0$، فالمنحنى يقع **تحت** المقارب.
+
+**ماذا يُسأل عادة في الامتحانات؟**
+1. إثبات أن مستقيماً معطى معادلته $y = ax + b$ هو مقارب مائل (بحساب نهاية الفرق وإثبات أنها صفر).
+2. دراسة الوضع النسبي للمنحنى والمقارب (بدراسة إشارة الفرق).
+**تنبيه:** قد يبقى المنحنى دائماً فوق المقارب أو تحته (مثل الفرق $-\frac{1}{x^2}$ الذي سالب دائماً)، وقد يغير موقعه حسب المجالات (مثل الفرق $\frac{10}{x+1}$ الذي تتغير إشارته عند $x=-1$).</span></div><div class="block">
+      <div class="q-card"><div class="q-title"><span class="md">مثال محلول: إثبات مقارب مائل ودراسة الوضع النسبي</span></div><div class="q-body"><span class="md">ليكن $C_f$ الخطّ البياني للتابع $f$ المعطى بالعلاقة $f(x) = \frac{x^2 + 3x + 1}{x + 2}$. وليكن $\Delta$ المستقيم الذي معادلته $y = x + 1$.</span></div><div class="hint-body" style="background:rgba(59,130,246,0.07);border-color:rgba(59,130,246,0.25);color:#93c5fd;">
+            <span class="body-label" style="color:#60a5fa;">المطلوب</span><div class="req-row">
+                <span class="req-num">1.</span>
+                <span class="req-body"><span class="md">أثبت أنّ المستقيم $\Delta$ مقارب للخطّ $C_f$ في جوار $+\infty$</span></span>
+              </div><div class="req-row">
+                <span class="req-num">2.</span>
+                <span class="req-body"><span class="md">ادرس وضع $C_f$ بالنسبة إلى $\Delta$</span></span>
+              </div></div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 1:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">احسب الفرق $f(x) - (x+1)$ وبسّطه</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">احسب نهاية الفرق عند $+\infty$</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">لاحظ أنّ 
+$f(x) - (x+1) $
+$= \frac{x^2 + 3x + 1 - (x^2 + 3x + 2)}{x + 2} = \frac{-1}{x + 2}$</span></div><div class="step-row"><span class="md">إذن 
+$\lim_{x \to +\infty} (f(x) - (x+1)) $
+$= \lim_{x \to +\infty} \frac{-1}{x+2} = 0$</span></div><div class="step-row"><span class="md">فالمستقيم $\Delta$ مستقيم مقارب للخطّ البياني $C_f$ في جوار $+\infty$</span></div><div style="margin-block-start:3px;"><span class="md">المستقيم $y = x+1$ مقارب مائل لـ $C_f$ في جوار $+\infty$</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 2:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">ادرس إشارة الفرق $\frac{-1}{x + 2}$</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">حدد موقع المنحنى بناء على إشارة الفرق</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">نُعاكس إشارة $f(x) - (x+1)$ إشارة $x + 2$</span></div><div class="step-row"><span class="md">على المجال $]-2, +\infty[$، $f(x) - (x+1) &lt; 0$، فجزء الخطّ البياني $C_f$ الموافق لقيم $x &gt; -2$ يقع تحت $\Delta$.</span></div><div class="step-row"><span class="md">على المجال $]-\infty, -2[$، $f(x) - (x+1) &gt; 0$، فجزء الخطّ البياني $C_f$ الموافق لقيم $x &lt; -2$ يقع فوق $\Delta$</span></div><div style="margin-block-start:3px;"><span class="md">المنحنى يقع فوق المقارب عندما $x &lt; -2$ وتحته عندما $x &gt; -2$.</span></div>
+            </div>
+          </div></div>
+    </div><div class="block">
+      <div class="q-card"><div class="q-title"><span class="md">تدرب صفحة 51: دراسة المقاربات المائلة</span></div><div class="q-body"><span class="md">فيما يأتي بيّن معللاً إجابتك إذا كان المستقيم $\Delta$ مقارباً مائلاً للخطّ البياني $C_f$ للتابع $f$. ادرس الوضع النسبي:</span></div><div class="hint-body" style="background:rgba(59,130,246,0.07);border-color:rgba(59,130,246,0.25);color:#93c5fd;">
+            <span class="body-label" style="color:#60a5fa;">المطلوب</span><div class="req-row">
+                <span class="req-num">1.</span>
+                <span class="req-body"><span class="md">$f(x) = 2x + 3 + \frac{10}{x+1}$، $\Delta : y = 2x + 3$</span></span>
+              </div><div class="req-row">
+                <span class="req-num">2.</span>
+                <span class="req-body"><span class="md">$f(x) = -x + 1 - \frac{1}{x^2}$، $\Delta : y = -x + 1$</span></span>
+              </div><div class="req-row">
+                <span class="req-num">3.</span>
+                <span class="req-body"><span class="md">$f(x) = x + \frac{\sin x}{x}$، $\Delta : y = x$</span></span>
+              </div><div class="req-row">
+                <span class="req-num">4.</span>
+                <span class="req-body"><span class="md">$f(x) = 3x + 7 - \frac{5}{\sqrt{|x|}}$، $\Delta : y = 3x + 7$</span></span>
+              </div><div class="req-row">
+                <span class="req-num">5.</span>
+                <span class="req-body"><span class="md">$f(x) = \frac{2x^2 - 7x - 3}{x - 4}$، $\Delta : y = 2x + 1$</span></span>
+              </div><div class="req-row">
+                <span class="req-num">6.</span>
+                <span class="req-body"><span class="md">$f(x) = \frac{x^3 - 3x - 5}{(x+1)^2}$، $\Delta : y = x - 2$</span></span>
+              </div><div class="req-row">
+                <span class="req-num">7.</span>
+                <span class="req-body"><span class="md">$f(x) = \frac{-x^2 - 4x + \sin x}{x}$، $\Delta : y = -x - 4$</span></span>
+              </div><div class="req-row">
+                <span class="req-num">8.</span>
+                <span class="req-body"><span class="md">$f(x) = \frac{x^2 + \frac{5}{2}x + \sqrt{x} + 1}{2x + 1}$، $\Delta : y = \frac{1}{2}x + 1$</span></span>
+              </div></div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 1:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">ضع $g(x) = f(x) - (2x + 3)$ واحسب نهايته</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">ادرس إشارة $g(x)$</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">لنضع $g(x) = f(x) - (2x + 3) = \frac{10}{x+1}$. نلاحظ أنّ $\lim_{x \to \pm\infty} g(x) = 0$، إذن $\Delta$ مقارب مائل.</span></div><div class="step-row"><span class="md">جدول الإشارة للوضع النسبي:
+| $x$ | $-\infty$ | $-1$ | $+\infty$ |
+|---|---|---|---|
+| $g(x)$ | $-$ | $\Vert$ | $+$ |
+| $C_f$ | $\Delta$ تحت | | $\Delta$ فوق |</span></div><div style="margin-block-start:3px;"><span class="md">المقارب مائل عند $\pm\infty$. المنحنى فوقه على $]-1, +\infty[$ وتحته على $]-\infty, -1[$.</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 2:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">ضع $g(x) = f(x) - (-x + 1)$ واحسب نهايته</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">لاحظ أن $g(x)$ سالبة دائماً</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">لنضع $g(x) = f(x) - (-x + 1) = -\frac{1}{x^2}$. نلاحظ أنّ $\lim_{x \to \pm\infty} g(x) = 0$، إذن $\Delta$ مقارب مائل.</span></div><div class="step-row"><span class="md">جدول الإشارة للوضع النسبي:
+| $x$ | $-\infty$ | $0$ | $+\infty$ |
+|---|---|---|---|
+| $g(x)$ | $-$ | $\Vert$ | $-$ |
+| $C_f$ | $\Delta$ تحت | | $\Delta$ تحت |</span></div><div style="margin-block-start:3px;"><span class="md">المقارب مائل عند $\pm\infty$. المنحنى يقع دائماً تحته.</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 3:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">ضع $g(x) = f(x) - x$ واحسب نهايته</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">إشارة $g(x)$ تتفق مع إشارة $\sin x$ على $]0, +\infty[$</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">لنضع $g(x) = f(x) - x = \frac{\sin x}{x}$. نلاحظ أنّ $\lim_{x \to \pm\infty} g(x) = 0$، إذن $\Delta$ مقارب مائل.</span></div><div class="step-row"><span class="md">جدول الإشارة للوضع النسبي (حيث $k$ عدد طبيعي):
+| $x$ | $2k\pi$ | | $(2k+1)\pi$ | | $(2k+2)\pi$ |
+|---|---|---|---|---|---|
+| $g(x)$ | $0$ | $+$ | $0$ | $-$ | $0$ |
+| $C_f$ | | $\Delta$ فوق | | $\Delta$ تحت | |</span></div><div style="margin-block-start:3px;"><span class="md">المقارب مائل عند $\pm\infty$. المنحنى يتقاطع مع المقارب عند النقاط $(k\pi, k\pi)$.</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 4:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">ضع $g(x) = f(x) - (3x + 7)$ واحسب نهايته</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">لاحظ أن الجذر في المقام يجعل التعبير سالباً دائماً</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">لنضع $g(x) = f(x) - (3x + 7) = -\frac{5}{\sqrt{|x|}}$. نلاحظ أنّ $\lim_{x \to \pm\infty} g(x) = 0$، إذن $\Delta$ مقارب مائل.</span></div><div class="step-row"><span class="md">جدول الإشارة للوضع النسبي:
+| $x$ | $-\infty$ | $0$ | $+\infty$ |
+|---|---|---|---|
+| $g(x)$ | $-$ | $\Vert$ | $-$ |
+| $C_f$ | $\Delta$ تحت | | $\Delta$ تحت |</span></div><div style="margin-block-start:3px;"><span class="md">المقارب مائل عند $\pm\infty$. المنحنى يقع دائماً تحته.</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 5:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">ضع $g(x) = f(x) - (2x + 1)$ وبسّط الكسر</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">ادرس إشارة المقدار البسيط الناتج</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">لنضع $g(x) = f(x) - (2x + 1) = \frac{1}{x-4}$. نلاحظ أنّ $\lim_{x \to \pm\infty} g(x) = 0$، إذن $\Delta$ مقارب مائل.</span></div><div class="step-row"><span class="md">جدول الإشارة للوضع النسبي:
+| $x$ | $-\infty$ | $4$ | $+\infty$ |
+|---|---|---|---|
+| $g(x)$ | $-$ | $\Vert$ | $+$ |
+| $C_f$ | $\Delta$ تحت | | $\Delta$ فوق |</span></div><div style="margin-block-start:3px;"><span class="md">المقارب مائل عند $\pm\infty$. المنحنى فوقه على $]4, +\infty[$ وتحته على $]-\infty, 4[$.</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 6:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">ضع $g(x) = f(x) - (x - 2)$ وبسّط الكسر</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">بما أن المقام مربع، فالإشارة سالبة دائماً</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">لنضع $g(x) = f(x) - (x - 2) = \frac{-3}{(x+1)^2}$. نلاحظ أنّ $\lim_{x \to \pm\infty} g(x) = 0$، إذن $\Delta$ مقارب مائل.</span></div><div class="step-row"><span class="md">جدول الإشارة للوضع النسبي:
+| $x$ | $-\infty$ | $-1$ | $+\infty$ |
+|---|---|---|---|
+| $g(x)$ | $-$ | $\Vert$ | $-$ |
+| $C_f$ | $\Delta$ تحت | | $\Delta$ تحت |</span></div><div style="margin-block-start:3px;"><span class="md">المقارب مائل عند $\pm\infty$. المنحنى يقع دائماً تحته.</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 7:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">ضع $g(x) = f(x) - (-x - 4)$ واحسب نهايته</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">إشارة $g(x)$ تتفق مع إشارة $\sin x$ على $]0, +\infty[$</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">لنضع $g(x) = f(x) - (-x - 4) = \frac{\sin x}{x}$. نلاحظ أنّ $\lim_{x \to \pm\infty} g(x) = 0$، إذن $\Delta$ مقارب مائل.</span></div><div class="step-row"><span class="md">جدول الإشارة للوضع النسبي (حيث $k$ عدد طبيعي):
+| $x$ | $2k\pi$ | | $(2k+1)\pi$ | | $(2k+2)\pi$ |
+|---|---|---|---|---|---|
+| $g(x)$ | $0$ | $+$ | $0$ | $-$ | $0$ |
+| $C_f$ | | $\Delta$ فوق | | $\Delta$ تحت | |</span></div><div style="margin-block-start:3px;"><span class="md">المقارب مائل عند $\pm\infty$. المنحنى يتقاطع مع المقارب عند النقاط $(k\pi, -k\pi - 4)$.</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 8:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">ضع $g(x) = f(x) - (\frac{1}{2}x + 1)$ وبسّط الكسر</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">لاحظ أن التابع معرّف على $[0, +\infty[$</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">لنضع $g(x) = f(x) - (\frac{1}{2}x + 1) = \frac{\sqrt{x}}{2x+1}$. نلاحظ أنّ $\lim_{x \to +\infty} g(x) = 0$، إذن $\Delta$ مقارب مائل عند $+\infty$.</span></div><div class="step-row"><span class="md">جدول الإشارة للوضع النسبي:
+| $x$ | $0$ | $+\infty$ |
+|---|---|---|
+| $g(x)$ | $0$ | $+$ |
+| $C_f$ | | $\Delta$ فوق |</span></div><div style="margin-block-start:3px;"><span class="md">المقارب مائل عند $+\infty$ فقط. المنحنى يقع دائماً فوقه ويتقاطع معه عند $(0, 0)$.</span></div>
+            </div>
+          </div></div>
+    </div><div class="block">
+      <h2 class="block-heading lvl-2"><span class="md">الاستمرار عند نقطة أو على مجموعة</span></h2>
+    </div><div class="block">
+      <div class="card">
+        <div class="def-term"><span class="md">استمرار التابع عند نقطة</span></div>
+        <div class="def-body"><span class="md">ليكن $a$ نقطة من $D_f$. نقول إنّ التابع $f$ مستمرّ عند $a$، إذا وفقط إذا تحقّق الشرط: $\lim_{x \to a} f(x) = f(a)$. ونقول إنّ التابع $f$ مستمرّ على مجموعة $D$ محتواة في $D_f$، إذا وفقط إذا كان $f$ مستمرّاً عند كلّ نقطة من نقاط $D$.</span></div>
+      </div>
+    </div><div class="block block-text"><span class="md">نستنتج من هذا التعريف ومن المبرهنات المتعلّقة بالعمليّات على نهايات التوابع، أنّ مجموع تابعَين مستمرّين عند نقطة (أو على مجموعة) مستمرّ أيضاً عندها. وكذلك يكون جداء ضربهما، أو خارج قسمتهما شريطة كونه معرّفاً. كما نستنتج من خاصّة نهاية التابع المركّب أنّ مركّب تابعين مستمرّين مستمرّ أيضاً. ولكن ليس لدراسة استمرار تابع، عند نقطة لا تنتمي إلى مجموعة تعريف التابع، أيّ معنىً.</span></div><div class="block">
+      <div class="theorem-card"><div class="theorem-title"><span class="md">مبرهنة 5: العلاقة بين الاستمرار والاشتقاق</span></div><div class="theorem-body"><span class="md">1. إذا كان التابع $f$ اشتقاقياً في نقطة $a$، كان مستمرّاً في $a$.
+2. إذا كان التابع $f$ اشتقاقياً على مجال $I$، كان مستمرّاً على $I$.</span></div>
+      </div>
+    </div><div class="block"><div class="list-title"><span class="md">أنواع التوابع المرجعية والدالة المحدودة</span></div><div class="list-item">
+          <span class="list-marker">1-</span>
+          <span class="list-body"><span class="md">تابع الجذر التربيعي: $x \mapsto \sqrt{x}$ (مستمر على $[0, +\infty[$).</span></span>
+        </div><div class="list-item">
+          <span class="list-marker">2-</span>
+          <span class="list-body"><span class="md">توابع كثيرات الحدود: مستمرة على $\mathbb{R}$.</span></span>
+        </div><div class="list-item">
+          <span class="list-marker">3-</span>
+          <span class="list-body"><span class="md">التوابع الكسرية: مستمرة على مجموعة تعريفها $D_f$.</span></span>
+        </div><div class="list-item">
+          <span class="list-marker">4-</span>
+          <span class="list-body"><span class="md">التوابع المثلثية: مثل $x \mapsto \sin x$ و $x \mapsto \cos x$ (مستمرة على $\mathbb{R}$).</span></span>
+        </div><div class="list-item">
+          <span class="list-marker">5-</span>
+          <span class="list-body"><span class="md">الدالة المحدودة: تابع يحقق وجود عددين حقيقيين $m$ و $M$ بحيث $m \le f(x) \le M$ لكل $x$ من مجموعة تعريفه.</span></span>
+        </div></div><div class="block">
+      <div class="callout warning"><div class="callout-title">
+            <span class="md">تنبّه: الاستمرار لا يستلزم الاشتقاق</span>
+          </div><div class="callout-body"><span class="md">من المعلوم أنّ تابعاً اشتقاقياً على مجال $I$، يكون بالضرورة مستمرّاً على $I$. لكن العكس ليس بالضرورة صحيحاً. تابع «الجذر التربيعي» مستمرّ عند الصفر لكنه غير اشتقاقي عند الصفر، لأنّ $\frac{f(x) - f(0)}{x - 0} = \frac{1}{\sqrt{x}}$ ونهايتها عند الصفر تساوي $+\infty$. كذلك التابع $|x|$ مستمر عند الصفر وغير اشتقاقي عنده، حيث يقبل الخط البياني مماساً شاقولياً في المبدأ.</span></div>
+      </div>
+    </div><div class="block">
+      <div class="q-card"><div class="q-title"><span class="md">تدرب صفحة 54: دراسة تابع جذري مثلثي</span></div><div class="q-body"><span class="md">نتأمل التابع $f$ المعطى وفق $f(x) = \sqrt{1 - \cos x}$</span></div><div class="hint-body" style="background:rgba(59,130,246,0.07);border-color:rgba(59,130,246,0.25);color:#93c5fd;">
+            <span class="body-label" style="color:#60a5fa;">المطلوب</span><div class="req-row">
+                <span class="req-num">1.</span>
+                <span class="req-body"><span class="md">ما مجموعة تعريف $f$؟</span></span>
+              </div><div class="req-row">
+                <span class="req-num">2.</span>
+                <span class="req-body"><span class="md">أيكون $f$ مستمراً على مجموعة تعريفه؟</span></span>
+              </div><div class="req-row">
+                <span class="req-num">3.</span>
+                <span class="req-body"><span class="md">بيّن أنّ التابع $f$ زوجي ويقبل العدد $2\pi$ دوراً له</span></span>
+              </div><div class="req-row">
+                <span class="req-num">4.</span>
+                <span class="req-body"><span class="md">ليكن $g$ مقصور التابع $f$ على المجال $[0, \pi]$. أثبت أنّ $g$ اشتقاقي</span></span>
+              </div><div class="req-row">
+                <span class="req-num">5.</span>
+                <span class="req-body"><span class="md">استنتج الخط البياني للتابع $f$ على المجال $[-2\pi, 2\pi]$. ما مجموعة تعريف $f&#39;$؟</span></span>
+              </div></div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 1:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">لاحظ أن جيب التمام محصور بين -1 و 1</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">لما كان $1 - \cos x \ge 0$ أياً كانت قيمة $x$ استنتجنا أنّ $f$ معرّف على $\mathbb{R}$</span></div><div class="step-row"><span class="md">إذن $D_f = \mathbb{R}$</span></div><div style="margin-block-start:3px;"><span class="md">$D_f = \mathbb{R}$</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 2:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">استخدم استمرار التوابع المرجعية وتركيبها</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">التابع $f$ مستمرٌّ على $\mathbb{R}$ نظراً إلى استمرار كلّ من التابع $x \mapsto 1 - \cos x$ و $x \mapsto \sqrt{x}$</span></div><div style="margin-block-start:3px;"><span class="md">التابع $f$ مستمر على $\mathbb{R}$</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 3:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">احسب $f(-x)$</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">احسب $f(x + 2\pi)$</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">مجموعة التعريف متناظرة، $f(-x) = \sqrt{1 - \cos(-x)} = $
+$\sqrt{1 - \cos x} = f(x)$
+ فالتابع $f$ زوجي.</span></div><div class="step-row"><span class="md">تابع التجيب دوري ويقبل العدد $2\pi$ دوراً إذن $f(x + 2\pi) = f(x)$، فالتابع $f$ أيضاً دوري ويقبل العدد $2\pi$ دوراً</span></div><div style="margin-block-start:3px;"><span class="md">التابع زوجي ودوري دوره $2\pi$</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 4:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">استخدم العلاقة $1 - \cos x = 2\sin^2(\frac{x}{2})$</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">بما أن $x \in [0, \pi]$ فإن $\sin(\frac{x}{2}) \ge 0$</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">في حالة $x$ من $[0, \pi]$ لدينا $\sin(\frac{x}{2}) \ge 0$ ولأنّ $1 - \cos x = 2\sin^2(\frac{x}{2})$ استنتجنا أنّ $g(x) = \sqrt{2}\sin\left(\frac{x}{2}\right)$</span></div><div class="step-row"><span class="md">إذن يتفق $g$ أيضاً مع مقصور التابع الاشتقاقي $x \mapsto \sqrt{2}\sin(\frac{x}{2})$ على المجال $[0, \pi]$، فهو اشتقاقي على هذا المجال</span></div><div style="margin-block-start:3px;"><span class="md">$g$ اشتقاقي على $[0, \pi]$</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 5:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">استخدم زوجية التابع ودوريته لرسم المنحنى</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">حدد نقاط عدم الاشتقاق من خلال رؤوس المنحنى</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">التابع $f$ زوجي ودورته $2\pi$، إذن من رسم $g$ نستنتج رسم $C_f$ على $[-\pi, \pi]$ وبتكرار هذا الرسم نحصل على رسم $C_f$ على أي مجال من $\mathbb{R}$.</span></div><div class="step-row"><span class="md">نستنتج من الرسم أنّ $f&#39;$ غير معرّف عند $0$ ثمّ عند أيّ $x_0 = 2\pi k$ حيث $k \in \mathbb{Z}$ لأنّ $f$ دوري ويقبل العدد $2\pi$ دوراً.</span></div><div style="margin-block-start:3px;"><span class="md">$f&#39;$ غير معرّف عند النقاط $x = 2k\pi$ لكل $k \in \mathbb{Z}$.</span></div>
+            </div>
+          </div></div>
+    </div><div class="block">
+      <h2 class="block-heading lvl-2"><span class="md">التوابع المستمرة و حل المعادلات</span></h2>
+    </div><div class="block">
+      <h3 class="block-heading lvl-3"><span class="md">مبرهنة القيمة الوسطى</span></h3>
+    </div><div class="block">
+      <div class="theorem-card"><div class="theorem-title"><span class="md">مبرهنة القيمة الوسطى لتابع مستمر</span></div><div class="theorem-body"><span class="md">إذا كان التابع $f$ مستمراً على المجال المغلق $[a, b]$، و $y$ عدد حقيقي محصور بين $f(a)$ و $f(b)$، فإنه يوجد على الأقل عدد حقيقي $c \in [a, b]$ بحيث $f(c) = y$.</span></div>
+      </div>
+    </div><div class="block">
+      <h3 class="block-heading lvl-3"><span class="md">صورة مجال وفق تابع مستمر ومطرد تماماً</span></h3>
+    </div><div class="block">
+      <div class="theorem-card"><div class="theorem-title"><span class="md">صورة المجال المغلق والمفتوح</span></div><div class="theorem-body"><span class="md">إذا كان التابع $f$ مستمراً ومطرداً تماماً على المجال $I$، فإن صورة هذا المجال $f(I)$ هي أيضاً مجال، وتحدد قيمته كالتالي:
+1. إذا كان $I = [a, b]$ وكان $f$ متزايداً، فإن $f(I) = [f(a), f(b)]$.
+2. إذا كان $f$ متناقصاً، فإن $f(I) = [f(b), f(a)]$.
+3. للمجالات المفتوحة أو نصف المغلقة (مثل $]a, b]$)، نستبدل القيمة الطرفية المفتوحة بنهاية التابع عند تلك النقطة (مثلاً $f(]a, b]) = ]\lim_{x \to a} f(x), f(b)]$).</span></div>
+      </div>
+    </div><div class="block">
+      <div class="q-card"><div class="q-title"><span class="md">إثبات وجود جذر وحصره هندسياً</span></div><div class="q-body"><span class="md">ليكن $f$ التابع المعرّف على $\mathbb{R}$ وفق $f(x) = x^3 - 2x^2 - 1$.</span></div><div class="hint-body" style="background:rgba(59,130,246,0.07);border-color:rgba(59,130,246,0.25);color:#93c5fd;">
+            <span class="body-label" style="color:#60a5fa;">المطلوب</span><div class="req-row">
+                <span class="req-num">1.</span>
+                <span class="req-body"><span class="md">أثبت أنّ المعادلة $f(x) = 0$ تقبل حلاً وحيداً $c$ في المجال $[2, 3]$</span></span>
+              </div><div class="req-row">
+                <span class="req-num">2.</span>
+                <span class="req-body"><span class="md">اكتب معادلة للمماس $T$ للخطّ البياني للتابع $f$ في النقطة $M$ التي فاصلتها $2$ وعيّن $\alpha$ فاصلة نقطة تقاطع $T$ مع محور الفواصل</span></span>
+              </div><div class="req-row">
+                <span class="req-num">3.</span>
+                <span class="req-body"><span class="md">اكتب معادلة للمستقيم $S$ المارّ بالنقطة $M$ والنقطة $N(\alpha, f(\alpha))$. ثمّ عيّن $\beta$ فاصلة نقطة تقاطع $S$ مع محور الفواصل</span></span>
+              </div><div class="req-row">
+                <span class="req-num">4.</span>
+                <span class="req-body"><span class="md">رتّب الأعداد $\alpha$ و $\beta$ و $c$ تصاعدياً، واستنتج مجالاً يحصر الحلّ $c$</span></span>
+              </div></div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 1:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">احسب المشتقة $f&#39;(x)$ وادرس إشارتها لإنشاء جدول التغيرات</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">تحقق من أن $f$ يغير إشارته بين $2$ و $3$</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">المشتقة هي $f&#39;(x) = 3x^2 - 4x = x(3x - 4)$. جدول تغيرات التابع $f$ يبيّن سلوكه على $\mathbb{R}$ وبالأخص على المجال $[2, 3]$:
+
+| $x$ | $-\infty$ | | $0$ | | $\frac{4}{3}$ | | $2$ | | $3$ | | $+\infty$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $f&#39;(x)$ | | $+$ | $0$ | $-$ | $0$ | $+$ | | $+$ | | $+$ | |
+| $f(x)$ | $-\infty$ | $\nearrow$ | $-1$ | $\searrow$ | $-\frac{59}{27}$ | $\nearrow$ | $-1$ | $\nearrow$ | $8$ | $\nearrow$ | $+\infty$ |
+
+من الجدول نلاحظ أن التابع $f$ مستمر ومتزايد تماماً على المجال $[2, 3]$.</span></div><div class="step-row"><span class="md">نحسب القيمتين الطرفيتين: $f(2) = 2^3 - 2(2^2) - 1 = 8 - 8 - 1 = -1 &lt; 0$.</span></div><div class="step-row"><span class="md">و $f(3) = 3^3 - 2(3^2) - 1 = 27 - 18 - 1 = 8 &gt; 0$.</span></div><div class="step-row"><span class="md">بما أن $f$ مستمر ومتزايد تماماً على $[2, 3]$ و $f(2) \cdot f(3) &lt; 0$، فإنه يوجد حل وحيد $c \in ]2, 3[$ بحيث $f(c) = 0$.</span></div><div style="margin-block-start:3px;"><span class="md">يوجد حل وحيد $c \in ]2, 3[$ للمعادلة $f(x) = 0$.</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 2:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">استخدم صيغة معادلة المماس: $y = f&#39;(a)(x - a) + f(a)$</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">لإيجاد تقاطع مع محور الفواصل، ضع $y = 0$</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">معادلة المماس $T$ في النقطة 
+$M(2, -1)$ هي: $y = f&#39;(2)(x - 2) + f(2) $
+$= 4(x - 2) - 1 = 4x - 9$</span></div><div class="step-row"><span class="md">نضع $y = 0$ فنحصل على $4x - 9 = 0$، أي $\alpha = \frac{9}{4}$</span></div><div style="margin-block-start:3px;"><span class="md">$\alpha = \frac{9}{4}$</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 3:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">استخدم صيغة معادلة المستقيم المار بنقطتين</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">لإيجاد تقاطع مع محور الفواصل، ضع $y = 0$</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">معادلة المستقيم $S$ المارّ بالنقطة $M(2, -1)$ والنقطة $N(\frac{9}{4}, f(\frac{9}{4}))$ هي $y = \frac{f(\frac{9}{4}) - f(2)}{\frac{9}{4} - 2}(x - 2) + f(2)$</span></div><div class="step-row"><span class="md">بالتعويض والتبسيط نجد: $y = \frac{81}{16}x - \frac{89}{8}$</span></div><div class="step-row"><span class="md">نضع $y = 0$ فنحصل على $\frac{81}{16}x = \frac{89}{8}$، أي $\beta = \frac{178}{81}$</span></div><div style="margin-block-start:3px;"><span class="md">$\beta = \frac{178}{81}$</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 4:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">احسب $f(\alpha)$ و $f(\beta)$</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">استخدم التزايد التام لترتيب القيم</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">لاحظ أنّ $f(\alpha) = f(\frac{9}{4}) = \frac{17}{64} &gt; 0$ و $f(\beta) = f(\frac{178}{81}) = -\frac{24497}{(81)^3} &lt; 0$</span></div><div class="step-row"><span class="md">بما أن $f$ متزايد تماماً على $[2, 3]$ و $f(c) = 0$، فإن الترتيب التصاعدي هو $\beta &lt; c &lt; \alpha$</span></div><div class="step-row"><span class="md">وعليه، يقع $c$ في المجال $]\beta, \alpha[$</span></div><div style="margin-block-start:3px;"><span class="md">الترتيب التصاعدي هو $\beta &lt; c &lt; \alpha$ وعليه $c \in ]\beta, \alpha[$</span></div>
+            </div>
+          </div></div>
+    </div><div class="block">
+      <h2 class="block-heading lvl-2"><span class="md">مفهوم التابع العكسي</span></h2>
+    </div><div class="block">
+      <div class="card">
+        <div class="def-term"><span class="md">التابع العكسي (التقابل العكسي)</span></div>
+        <div class="def-body"><span class="md">إذا كان $f$ تابعاً مستمراً ومطرداً تماماً على مجال $I$ و $J = f(I)$، فإن $f$ تقابل من $I$ إلى $J$. نعرّف التابع العكسي $g$ (ونرمز له $f^{-1}$) على $J$ بحيث إذا كان $y$ عدداً من $J$ وكان $x$ الحل الوحيد للمعادلة $f(x) = y$، فإن $g(y) = x$. يحقق $g(f(x)) = x$ لكل $x \in I$ و $f(g(y)) = y$ لكل $y \in J$.</span></div>
+      </div>
+    </div><div class="block">
+      <div class="q-card"><div class="q-title"><span class="md">تدرب صفحة 61</span></div><div class="q-body"><span class="md">حل التمارين التالية</span></div><div class="hint-body" style="background:rgba(59,130,246,0.07);border-color:rgba(59,130,246,0.25);color:#93c5fd;">
+            <span class="body-label" style="color:#60a5fa;">المطلوب</span><div class="req-row">
+                <span class="req-num">1.</span>
+                <span class="req-body"><span class="md">التابع $f(x) = x^3 - x^2 + x - 2$. علّل لماذا يكون للمعادلة $f(x) = 0$ حلّ وحيد في المجال $]1,2[$؟</span></span>
+              </div><div class="req-row">
+                <span class="req-num">2.</span>
+                <span class="req-body"><span class="md">التابع $f(x) = x^3 - 3x^2 + 1$. علّل لماذا يكون للمعادلة $f(x) + 1 = 0$ ثلاثة وفقط ثلاثة حلول حقيقية؟</span></span>
+              </div><div class="req-row">
+                <span class="req-num">3.</span>
+                <span class="req-body"><span class="md">ليكن $f(x) = \frac{1}{x - 1}$ على $I = [2, 3]$. ما عدد حلول المعادلة $f(x) = \frac{3}{4}$ في المجال $I$؟</span></span>
+              </div></div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 1:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">احسب $f(1)$ و $f(2)$ للتأكد من تغير الإشارة</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">احسب $f&#39;(x)$ وأثبت أنها موجبة دائماً</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">التابع $f$ مستمرّ على المجال $[1,2]$، ولدينا $f(1) = -1$ و $f(2) = 4$، فالتابع $f$ يغيّر إشارته فيوجد حلّ واحد على الأقل</span></div><div class="step-row"><span class="md">لإثبات وحدانية الحلّ:
+ $f&#39;(x) = 3x^2 - 2x + 1 $
+$= 2x^2 + (x - 1)^2 &gt; 0$</span></div><div class="step-row"><span class="md">إذن $f$ متزايد تماماً والحلّ الذي وجدناه وحيد</span></div><div style="margin-block-start:3px;"><span class="md">للمعادلة $f(x) = 0$ حل وحيد في $]1,2[$</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 2:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">احسب المشتقة وارسم جدول التغيرات</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">حدد صورة المجالات $]-\infty, 0[$ و $[0,2]$ و $]2, +\infty[$</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">تحقق من انتماء $-1$ لكل من هذه الصور</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">
+
+| $x$ | $-\infty$ | | $0$ | | $2$ | | $+\infty$ |
+|---|---|---|---|---|---|---|---|
+| $f&#39;(x)$ | | $+$ | $0$ | $-$ | $0$ | $+$ | |
+| $f(x)$ | $-\infty$ | $\nearrow$ | $1$ | $\searrow$ | $-3$ | $\nearrow$ | $+\infty$ |</span></div><div class="step-row"><span class="md">$f&#39;(x) = 3x(x - 2)$. التابع متزايد على $]-\infty, 0[$ ومتناقص على $[0,2]$ ومتزايد على $]2, +\infty[$.</span></div><div class="step-row"><span class="md">على $]-\infty, 0[$: $f(]-\infty, 0[) = ]-\infty, 1[$، وبما أن $-1 &lt; 1$ يوجد حل وحيد $x_1$.</span></div><div class="step-row"><span class="md">على $[0,2]$: $f([0,2]) = [-3,1]$، وبما أن $-1 \in [-3,1]$ يوجد حل وحيد $x_2$.</span></div><div class="step-row"><span class="md">على $]2, +\infty[$: $f(]2, +\infty[) = ]-3, +\infty[$، وبما أن $-1 &gt; -3$ يوجد حل وحيد $x_3$.</span></div><div style="margin-block-start:3px;"><span class="md">المعادلة $f(x) = -1$ تقبل ثلاثة حلول حقيقية فقط.</span></div>
+            </div>
+          </div><div style="margin-block-start:5px;">
+            <div style="color:#60a5fa;font-weight:600;font-size:5.7px;margin-block-end:3px;">
+              السؤال 3:
+            </div><div class="hint-body">
+                <span class="body-label">تلميحات</span><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">احسب صورة المجال $[2, 3]$ وفق التابع</span></span>
+                  </div><div class="list-item">
+                    <span class="list-marker">&bull;</span>
+                    <span class="list-body"><span class="md">تحقق من انتماء $\frac{3}{4}$ للصورة</span></span>
+                  </div></div><div class="solution-body" style="background:var(--container-2);border-color:var(--border);color:var(--text-body);">
+              <span class="body-label" style="color:var(--text-muted);">الحل</span>
+              <div class="steps-label">الخطوات:</div><div class="step-row"><span class="md">التابع المدروس مستمر ومتناقص تماماً على $[2, 3]$ إذن $f([2, 3]) = [f(3), f(2)] = [\frac{1}{2}, 1]$.</span></div><div class="step-row"><span class="md">لمّا كان $\frac{3}{4}$ عنصراً من $[\frac{1}{2}, 1]$ استنتجنا أنّ للمعادلة $f(x) = \frac{3}{4}$ حلاً وحيداً.</span></div><div style="margin-block-start:3px;"><span class="md">للمعادلة حل وحيد في المجال $[2, 3]$.</span></div>
+            </div>
+          </div></div>
+    </div><div class="block">
+      <div class="review-card"><div class="review-title"><span class="md">أفكار يجب تمثّلها</span></div><div class="list-item">
+            <span class="list-marker" style="color:#fbbf24;">&#10022;</span>
+            <span class="list-body"><span class="md">تتيح عمليات النهايات إيجاد نهاية مجموع أو جداء أو خارج توابع من نهاياتها المعروفة، لكنها قد تؤدي إلى حالات عدم تعيين مثل $\frac{\pm\infty}{\pm\infty}$ و $\frac{0}{0}$ و $0 \times \pm\infty$ و $+\infty - \infty$.</span></span>
+          </div><div class="list-item">
+            <span class="list-marker" style="color:#fbbf24;">&#10022;</span>
+            <span class="list-body"><span class="md">إذا كان تابع $f$ أكبر من تابع ينتهي إلى $+\infty$، فإن $f$ ينتهي إلى $+\infty$، وإذا كان أصغر من تابع ينتهي إلى $-\infty$، فإن $f$ ينتهي إلى $-\infty$.</span></span>
+          </div><div class="list-item">
+            <span class="list-marker" style="color:#fbbf24;">&#10022;</span>
+            <span class="list-body"><span class="md">مبرهنة الإحاطة: إذا كان $f$ محصوراً بين تابعين ينتهيان إلى نفس النهاية $\ell$، فإن $f$ ينتهي إلى $\ell$.</span></span>
+          </div></div>
+    </div><div class="block">
+      <div class="review-card"><div class="review-title"><span class="md">منعكسات يجب امتلاكها عند دراسة النهايات والاستمرار</span></div><div class="list-item">
+            <span class="list-marker" style="color:#fbbf24;">&#10022;</span>
+            <span class="list-body"><span class="md">عند البحث عن نهاية، استعمل التوابع المرجعية وتذكّر أن نهاية كثير الحدود أو التابع الكسري عند اللانهاية تساوي نهاية خارج قسمة الحدين المسيطرين.</span></span>
+          </div><div class="list-item">
+            <span class="list-marker" style="color:#fbbf24;">&#10022;</span>
+            <span class="list-body"><span class="md">للتغلب على حالات عدم التعيين، ضع الحد الأعلى درجة خارج قوسين، أو استفد من مبرهنة الإحاطة إذا لم تفلح العمليات.</span></span>
+          </div><div class="list-item">
+            <span class="list-marker" style="color:#fbbf24;">&#10022;</span>
+            <span class="list-body"><span class="md">لإثبات أن $y = ax + b$ مقارب، أثبت أن $\lim_{x \to +\infty} (f(x) - (ax + b)) = 0$، واستخدم تغيير المتغير $X = \frac{1}{x}$ لتحويل النهاية عند الصفر إلى اللانهاية وبالعكس.</span></span>
+          </div><div class="list-item">
+            <span class="list-marker" style="color:#fbbf24;">&#10022;</span>
+            <span class="list-body"><span class="md">لدراسة استمرار $f$ عند $a$، احسب $\lim_{x \to a} f(x)$ و $f(a)$ وتحقق من تساويهما.</span></span>
+          </div><div class="list-item">
+            <span class="list-marker" style="color:#fbbf24;">&#10022;</span>
+            <span class="list-body"><span class="md">استغل الاستمرار والاطراد التام لتابع $f$ لإثبات وجود حل ووحدانيته للمعادلة $f(x) = k$.</span></span>
+          </div></div>
+    </div><div class="block">
+      <div class="callout danger"><div class="callout-title">
+            <span class="md">أخطاء يجب تجنّبها</span>
+          </div><div class="callout-body"><span class="md">استمرار تابع عند $a$ لا يعني بالضرورة اشتقاقه في $a$. فمثلاً التابعان $x \mapsto \sqrt{x}$ و $x \mapsto |x|$ مستمرّان عند الصفر، وغير اشتقاقيين عنده. كذلك، لتعيين صورة المجال $[a, b]$ وفق تابعٍ $f$، لا يكفي حساب $f(a)$ و $f(b)$، بل يجب دراسة تغيرات التابع على المجال لمعرفة القيم الدنيا والقصوى.</span></div>
+      </div>
+    </div></main>
+
+<script>
+(function () {
+  'use strict';
+
+  // --------------------------------------------------------------
+  // Sanity check — if any of the required libraries didn't load,
+  // log which one and bail out (still signalling so the Python
+  // pipeline doesn't hang).
+  // --------------------------------------------------------------
+  if (typeof marked === 'undefined') {
+    console.error('[init] marked.js failed to load — cannot parse markdown.');
+  }
+  if (typeof renderMathInElement === 'undefined') {
+    console.error('[init] KaTeX auto-render failed to load — math will not render.');
+  }
+
+  // --------------------------------------------------------------
+  // 1) Markdown pass — turn `.md` spans into HTML.
+  //    Math is protected from marked by replacing it with an
+  //    invisible placeholder, then restored afterwards.
+  // --------------------------------------------------------------
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  function runMarked() {
+    if (typeof marked === 'undefined') return;
+    marked.setOptions({ breaks: true, gfm: true });
+
+    var nodes = document.querySelectorAll('.md');
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      var raw = el.textContent || '';
+      var store = [];
+
+      // Protect $...$ and $$...$$ from marked's inline parsing.
+      var guarded = raw
+        .replace(/\$\$([\s\S]+?)\$\$/g, function (m) {
+          store.push(m);
+          return '\u2060MATH' + (store.length - 1) + '\u2060';
+        })
+        .replace(/\$([^$\n]+?)\$/g, function (m) {
+          store.push(m);
+          return '\u2060MATH' + (store.length - 1) + '\u2060';
+        });
+
+      var html;
+      try {
+        html = marked.parse(guarded);
+      } catch (err) {
+        console.error('[marked] parse error:', err);
+        html = escapeHtml(guarded);
+      }
+
+      // Restore the protected LaTeX. Escaped so the HTML is valid,
+      // but the browser will decode it back to raw LaTeX in the text
+      // content — which is what KaTeX reads.
+      html = html.replace(/\u2060MATH(\d+)\u2060/g, function (_, idx) {
+        return escapeHtml(store[+idx]);
+      });
+
+      el.innerHTML = html;
+    }
+  }
+
+  // --------------------------------------------------------------
+  // 2) KaTeX pass — typeset every $...$ / $$...$$ in the document.
+  // --------------------------------------------------------------
+  function runKatex() {
+    if (typeof renderMathInElement !== 'function') return;
+
+    try {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true  },
+          { left: '$',  right: '$',  display: false },
+          { left: '\\[', right: '\\]', display: true  },
+          { left: '\\(', right: '\\)', display: false }
+        ],
+        throwOnError: false,
+        errorColor: '#f87171',
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        strict: false,
+        ignoredClasses: ['no-katex']
+      });
+    } catch (err) {
+      console.error('[katex] render error:', err);
+    }
+  }
+
+  // --------------------------------------------------------------
+  // 3) Signal the Python side that rendering is complete.
+  //    Wait for document.fonts.ready so KaTeX's web fonts are
+  //    actually available when Chromium takes a snapshot for PDF.
+  // --------------------------------------------------------------
+  function signalComplete() {
+    var done = function () {
+      document.body.classList.add('render-complete');
+    };
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(done).catch(done);
+    } else {
+      done();
+    }
+  }
+
+  // --------------------------------------------------------------
+  // Run. Because none of the CDN <script> tags above use `defer`
+  // or `async`, they have all finished executing by the time this
+  // block is reached.
+  // --------------------------------------------------------------
+  runMarked();
+  runKatex();
+  signalComplete();
+
+  // Hard fallback: if fonts.ready silently stalls, force the class
+  // after 10 s so 03_generate_pdf.py never times out on this page.
+  setTimeout(function () {
+    if (!document.body.classList.contains('render-complete')) {
+      console.warn('[init] fonts.ready stalled — signalling anyway.');
+      document.body.classList.add('render-complete');
+    }
+  }, 10000);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<title>${html_title}</title>
+ ${mathjax_block}
+ ${ready_script}
+<script>
+/* تثبيت «انتهى» أسفل الصفحة الأخيرة.
+   تستدعيها pdf_render.py بعد جاهزية المحتوى، مع ارتفاع منطقة الطباعة بالملّيمتر. */
+window.__PIN_END_TO_PAGE__ = async function (contentHeightMm) {
+  var pageH = contentHeightMm * 96 / 25.4;              /* CSS px لكل صفحة مطبوعة */
+  var mark = document.getElementById("end-mark");
+  if (!mark) { return; }
+
+  /* انتظار الصور حتى يكون القياس نهائياً */
+  await Promise.all(Array.prototype.map.call(document.images, function (img) {
+    if (img.complete) { return null; }
+    return new Promise(function (res) { img.onload = img.onerror = res; });
+  }));
+
+  var bottom = mark.getBoundingClientRect().bottom + (window.scrollY || 0);
+  var pages = Math.max(1, Math.ceil(bottom / pageH));   /* الصفحة التي ينتهي عندها */
+  var extra = pages * pageH - bottom - 2;               /* هامش أمان 2px */
+  if (extra > 0) {
+    /* padding وليس margin: الهوامش تُقتطع عند فواصل الصفحات */
+    var current = parseFloat(window.getComputedStyle(mark).paddingTop) || 0;
+    mark.style.paddingTop = (current + extra) + "px";
+  }
+};
+</script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Amiri", "Noto Naskh Arabic", "Times New Roman", serif;
+         font-size: 10pt; color: #1a1a1a; line-height: 1.6; background: #fff; }
+  /* بلا padding سفلي: وإلا انزلق «انتهى» المثبّت إلى صفحة فارغة إضافية */
+  .sheet { padding: 0 2px 0; }
+
+  header.exam-header { margin: 0 0 10px; padding: 2px; }
+  .header-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; }
+  .header-side { font-size: 8.5pt; line-height: 1.9; color: #8f8f8f; }
+  .header-side .field { display: block; padding: 0; margin: 0; }
+  .field-label { font-weight: 700; color: #9c9c9c; }
+  .field-value { color: #666; }
+  .field.teacher .field-value { font-weight: 700; font-size: 9.5pt; color: #555; }
+  .side-start { text-align: right; }
+  .side-end   { text-align: left; }
+  .header-center { text-align: center; padding: 0 6px; }
+  h1.exam-name { font-size: 16pt; font-weight: 800; margin: 0 0 2px; }
+  .exam-year { font-size: 11pt; font-weight: 700; color: #6b6b6b; }
+
+  ol.questions { margin: 0; padding-inline-start: 20px; }
+  li.question { margin-bottom: 8px; page-break-inside: avoid; }
+  .question-text p { margin: 0 0 2px; }
+  .question-text table { border-collapse: collapse; margin: 4px auto 0; }
+  .question-text th, .question-text td { border: 1px solid #bbb; padding: 1px 8px;
+                                         text-align: center; font-size: 9.5pt; }
+  img.question-image { max-width: 100%; max-height: 150px; display: block; margin: 4px auto 0; }
+
+  .end-mark { text-align: center; margin-top: 10px; font-weight: 700;
+              font-size: 9pt; color: #8a8a8a; page-break-inside: avoid; }
+</style>
+</head>
+<body>
+  <div class="sheet">
+    <header class="exam-header">
+      <div class="header-grid">
+        <div class="header-side side-start">
+ ${side_start}
+        </div>
+        <div class="header-center">
+          <h1 class="exam-name">${exam_name}</h1>
+          <div class="exam-year">${exam_year}</div>
+        </div>
+        <div class="header-side side-end">
+ ${side_end}
+        </div>
+      </div>
+    </header>
+    <ol class="questions">
+ ${questions_html}
+    </ol>
+    <div class="end-mark" id="end-mark">انتهى</div>
+  </div>
+</body>
+</html>
