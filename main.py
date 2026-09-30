@@ -37,10 +37,19 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Exam Generator", lifespan=lifespan)
 
 from fastapi.middleware.cors import CORSMiddleware
+ALLOWED_ORIGINS = [
+    origin.strip()
+    for origin in os.getenv(
+        "ALLOWED_ORIGINS",
+        "https://exam-generator.siraj.sy",
+    ).split(",")
+    if origin.strip()
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],       # fine here: no cookies/credentials are used
+    allow_origins=ALLOWED_ORIGINS,   # no wildcard — cookies/credentials-safe
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )

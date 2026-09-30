@@ -15,7 +15,7 @@ The client posts a multipart form containing the exam header (name, year, class 
 - **"انتهى" pinned to the bottom of the last page** so the printed exam always ends on a full page.
 - **Per-IP rate limiting** (in-memory, sliding window).
 - **SQLite-backed stats** (`/stats`) tracking number of generations and total questions generated.
-- **CORS enabled** for `*` origins — safe here because no cookies or credentials are used.
+- **CORS restricted** to the production frontend origin (`https://exam-generator.siraj.sy`) via the `ALLOWED_ORIGINS` env var.
 
 ---
 
@@ -98,14 +98,22 @@ Create a `.env` file next to `app/` (it is loaded automatically by `app/__init__
 RATE_LIMIT_REQUESTS=5
 RATE_LIMIT_WINDOW_SECONDS=300
 
-# Where SQLite stores its file (relative to the working directory)
-# DB_PATH=exams.db
+# CORS — comma-separated list of origins allowed to call this API.
+# Production: your domain only. Add localhost entries for local dev.
+ALLOWED_ORIGINS=https://exam-generator.siraj.sy
 ```
 
-| Variable                    | Default | Description                                          |
-| --------------------------- | ------- | ---------------------------------------------------- |
-| `RATE_LIMIT_REQUESTS`       | `5`     | Max requests allowed per IP inside the window.       |
-| `RATE_LIMIT_WINDOW_SECONDS` | `300`   | Sliding window length, in seconds.                   |
+| Variable                    | Default                                 | Description                                          |
+| --------------------------- | --------------------------------------- | ---------------------------------------------------- |
+| `RATE_LIMIT_REQUESTS`       | `5`                                     | Max requests allowed per IP inside the window.       |
+| `RATE_LIMIT_WINDOW_SECONDS` | `300`                                   | Sliding window length, in seconds.                   |
+| `ALLOWED_ORIGINS`           | `https://exam-generator.siraj.sy`       | Comma-separated list of CORS-allowed origins.        |
+
+For local development, add the frontend dev origin:
+
+```env
+ALLOWED_ORIGINS=https://exam-generator.siraj.sy,http://localhost:3000,http://127.0.0.1:3000
+```
 
 > The SQLite file path is currently hard-coded as `DB_PATH = "exams.db"` in `database.py`. It is **relative to the working directory** where the server is started.
 
@@ -207,7 +215,7 @@ Returns cumulative generation counters.
 
 ## How It Works
 
-1. **Form parsing** — `parse_questions_form` walks `form.multi_items()` and matches keys against `^questions\[(\d+)\][.\[]（text|image）\]?$`. Questions are returned in index order.
+1. **Form parsing** — `parse_questions_form` walks `form.multi_items()` and matches keys against `^questions\[(\d+)\][.\[](text|image)\]?$`. Questions are returned in index order.
 2. **Image handling** — each uploaded image is read into bytes; the MIME type is used to pick the file extension (`.png`, `.jpg`, `.gif`, `.webp`, `.svg`).
 3. **HTML build** — `render_exam_html` fills `template.html` with the header (three columns: `side_start`, `header-center`, `side_end`) and the question list. Question text passes through `normalize_latex` first, which:
    - Converts `$$...$$` → `$...$`
@@ -237,6 +245,20 @@ The MathJax config in `exam_html.py` supports both `$...$` and `\(...\)` delimit
 
 ---
 
+## CORS
+
+The API only accepts requests from origins listed in `ALLOWED_ORIGINS`. The default is `https://exam-generator.siraj.sy`, so in production only your frontend domain can call the API.
+
+Origins are matched **literally** — no wildcard subdomains. If you serve the frontend from both `https://exam-generator.siraj.sy` and `https://www.exam-generator.siraj.sy`, list both:
+
+```env
+ALLOWED_ORIGINS=https://exam-generator.siraj.sy,https://www.exam-generator.siraj.sy
+```
+
+`allow_credentials` is `False` because the API doesn't use cookies or auth headers. If you later add cookie-based auth, set it to `True` and make sure `ALLOWED_ORIGINS` no longer contains `*`.
+
+---
+
 ## Database
 
 `exams.db` is created automatically on startup if missing.
@@ -263,6 +285,7 @@ Client IP is taken from `request.client.host`, which will be the proxy IP unless
 ## Development Notes
 
 - **Windows + Playwright:** `_render_pdf_blocking` uses `asyncio.ProactorEventLoop` on Windows. On other platforms it uses a fresh default loop. This is required because uvicorn's running loop and Playwright's subprocess transport don't always cooperate on Windows.
+- **CORS:** the API only accepts requests from origins listed in `ALLOWED_ORIGINS`. To test the frontend locally, either add `http://localhost:3000` to that env var or run with `ALLOWED_ORIGINS=https://exam-generator.siraj.sy,http://localhost:3000`. If you change the frontend domain later, update this variable and restart the server.
 - **MathJax CDN dependency:** every PDF render fetches MathJax from `cdn.jsdelivr.net`. If the machine has no outbound network access, the endpoint returns `502`. To make the service fully offline, vendor `tex-mml-chtml.js` into `app/static/` and change `MATHJAX_BLOCK` in `exam_html.py` to a relative path.
 - **Template customization:** `template.html` is loaded as a `string.Template` — placeholders are `${html_title}`, `${mathjax_block}`, `${ready_script}`, `${exam_name}`, `${exam_year}`, `${side_start}`, `${side_end}`, `${questions_html}`. Add new placeholders by extending `render_exam_html`.
 
@@ -278,6 +301,9 @@ Move the project out of paths with spaces, delete `.venv`, and recreate it with 
 
 **`MathJax failed to load or render (CDN unreachable?)`**
 Either the machine has no internet access, or the CDN is blocked. Vendor MathJax locally (see *Development Notes*).
+
+**Browser console shows a CORS error**
+The origin sending the request is not in `ALLOWED_ORIGINS`. Check the exact scheme, host, and port of the frontend URL, add it to the env var (comma-separated), and restart the server. Origins are matched literally — `http://` and `https://` are different, `www.` and bare domain are different.
 
 **PDF renders but math looks unstyled**
 Verify `window.__MATHJAX_OK__` was `true` — the guard in `pdf_render.py` will raise before writing the PDF if not. If you're testing a variant that skips the guard, make sure MathJax's startup promise actually resolved.
