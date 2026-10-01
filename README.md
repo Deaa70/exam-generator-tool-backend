@@ -310,6 +310,6 @@ Verify `window.__MATHJAX_OK__` was `true` — the guard in `pdf_render.py` will 
 
 ---
 
-## License
+---
 
-Add your license here.
+Built by [Deaa Dev](https://deaa.vercel.app/ar).
