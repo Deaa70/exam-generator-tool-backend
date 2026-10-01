@@ -1,11 +1,15 @@
+import os
 import sqlite3
 from contextlib import closing
 
-DB_PATH = "exams.db"
-
+DB_PATH = os.getenv("DB_PATH", "exams.db")
 
 def init_db():
     """Create the generations table if it does not exist yet."""
+    parent = os.path.dirname(DB_PATH)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
+
     with closing(sqlite3.connect(DB_PATH)) as conn:
         conn.execute(
             """
@@ -16,8 +20,8 @@ def init_db():
             """
         )
         conn.commit()
-
-
+        
+        
 def record_generation(num_questions: int):
     """One row per generated exam, storing only how many questions it had."""
     with closing(sqlite3.connect(DB_PATH)) as conn:

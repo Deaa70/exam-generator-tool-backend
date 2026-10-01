@@ -1,4 +1,3 @@
-import html
 import logging
 import os
 import re
@@ -7,12 +6,12 @@ import uuid
 from contextlib import asynccontextmanager
 from urllib.parse import quote
 
-from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
+from fastapi import FastAPI,  Form, HTTPException, Request, UploadFile
 from fastapi.responses import Response
 
 # 1) import line
 from .database import get_stats, init_db, record_generation
-from .exam_html import parse_question_file, render_exam_html
+from .exam_html import  render_exam_html
 from .pdf_render import render_pdf
 from .rate_limiter import check_rate_limit
 
@@ -37,6 +36,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Exam Generator", lifespan=lifespan)
 
 from fastapi.middleware.cors import CORSMiddleware
+
 ALLOWED_ORIGINS = [
     origin.strip()
     for origin in os.getenv(
