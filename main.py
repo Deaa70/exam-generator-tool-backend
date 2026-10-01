@@ -36,7 +36,6 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Exam Generator", lifespan=lifespan)
 
 from fastapi.middleware.cors import CORSMiddleware
-
 ALLOWED_ORIGINS = [
     origin.strip()
     for origin in os.getenv(

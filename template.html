@@ -37,6 +37,13 @@ window.__PIN_END_TO_PAGE__ = async function (contentHeightMm) {
   /* بلا padding سفلي: وإلا انزلق «انتهى» المثبّت إلى صفحة فارغة إضافية */
   .sheet { padding: 0 2px 0; }
 
+  mjx-container {
+  font-size: 1em !important;
+}
+mjx-container[jax="CHTML"][display="true"] {
+  margin: 4px 0 !important;
+}
+
   header.exam-header { margin: 0 0 10px; padding: 2px; }
   .header-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; }
   .header-side { font-size: 8.5pt; line-height: 1.9; color: #8f8f8f; }

@@ -10,10 +10,19 @@ MATHJAX_BLOCK = r"""<script>
     tex: {
       inlineMath:  [['$','$'], ['\\(','\\)']],
       displayMath: [['$$','$$'], ['\\[','\\]']]
+    },
+    chtml: {
+      scale: 0.85,             /* shrink math to ~85% of body text */
+      matchFontHeight: false,  /* stop measuring Amiri's x-height */
+      mtextInheritFont: true   /* \text{...} uses the page font */
+    },
+    options: {
+      enableMenu: false        /* no right-click menu in a print PDF */
     }
   };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" async></script>"""
+
 
 READY_SCRIPT = """<script>
 (function () {
