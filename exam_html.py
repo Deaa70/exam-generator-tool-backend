@@ -12,7 +12,7 @@ MATHJAX_BLOCK = r"""<script>
       displayMath: [['$$','$$'], ['\\[','\\]']]
     },
     chtml: {
-      scale: 0.85,             /* shrink math to ~85% of body text */
+      scale: 0.88,             /* shrink math to ~88% of body text */
       matchFontHeight: false,  /* stop measuring Amiri's x-height */
       mtextInheritFont: true   /* \text{...} uses the page font */
     },
